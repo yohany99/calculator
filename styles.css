@@ -1,0 +1,39 @@
+body {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 500px;
+    border: 2px solid black;
+    margin-top: 50px;
+}
+
+.screen {
+    width: auto;
+    height: 100px;
+    border: 2px solid black;
+}
+
+.clear-and-delete {
+    display: flex;
+    flex-direction: row;
+}
+
+.clear, .delete {
+    flex: 1;
+}
+
+.numbers-and-operators {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.btn {
+    
+}
