@@ -14,9 +14,19 @@ body {
 }
 
 .screen {
+    display: flex;
+    flex-direction: column;
     width: auto;
     height: 100px;
     border: 2px solid black;
+}
+
+.history {
+    flex: 1;
+}
+
+.result {
+    flex: 2;
 }
 
 .clear-and-delete {
