@@ -12,9 +12,12 @@ const equalsButton = document.querySelector('.equals');
 const clearButton = document.querySelector('.clear');
 clearButton.addEventListener('click', resetCalculator);
 
+const decimalButton = document.querySelector('.decimal');
+
 let x;
 let operator;
 let y;
+let current;
 
 function selectButton(event) {
     let value = event.target.textContent;
@@ -32,29 +35,38 @@ function selectButton(event) {
             }
             equalsButton.disabled = true;
             populateResultScreen(value);
-            console.log(x);
+            current = 'x';
         } else {
             if (typeof y === 'undefined') {
                 y = value;
             } else {
                 y += value;
             }
+            current = 'y';
             equalsButton.disabled = false;
             populateResultScreen(value);
-            console.log(y);
         }
     } else {
         if (value === "=") {
-            let result = operate(x, operator, y);
-            populateHistoryScreen(value);
-            populateResultScreen(result);
-            equalsButton.disabled = true;
-            x = undefined;
-            y = undefined;
-            operator = undefined;
+            if (typeof x === 'undefined' || typeof y === 'undefined') {
+                return;
+            } else {
+                let result = operate(x, operator, y);
+                populateHistoryScreen(value);
+                populateResultScreen(result);
+                equalsButton.disabled = true;
+                x = result;
+                current = 'x'
+                y = undefined;
+                operator = undefined;
+            }
         } else {
-            if (typeof y !== 'undefined') {
+            if (typeof x === 'undefined' || (typeof y === 'undefined' && typeof operator !== 'undefined')) {
+                return;
+            }
+            else if (typeof y !== 'undefined') {
                 x = operate(x, operator, y);
+                current = 'x';
                 y = undefined;
             }
             populateHistoryScreen(value);
