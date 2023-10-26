@@ -9,6 +9,9 @@ const historyScreen = document.querySelector('.history');
 
 const equalsButton = document.querySelector('.equals');
 
+const clearButton = document.querySelector('.clear');
+clearButton.addEventListener('click', resetCalculator);
+
 let x;
 let operator;
 let y;
@@ -50,6 +53,10 @@ function selectButton(event) {
             y = undefined;
             operator = undefined;
         } else {
+            if (typeof y !== 'undefined') {
+                x = operate(x, operator, y);
+                y = undefined;
+            }
             populateHistoryScreen(value);
             operator = value;
         }
@@ -75,6 +82,14 @@ function clearHistoryScreen() {
 
 function disableButton(button) {
     button.disabled = true;
+}
+
+function resetCalculator() {
+    x = undefined;
+    y = undefined;
+    operator = undefined;
+    clearResultScreen();
+    clearHistoryScreen();
 }
 
 function add(x, y) {
